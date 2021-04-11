@@ -13,23 +13,23 @@
  */
 function findIndex(arr, znach) {
   let start = 0;
-  let rtn = 0;
-  let end = arr.length;
-  let zn = Math.floor((start + end) / 2);
-  while (rtn === 0) {
-    if (arr[zn] !== znach) {
-      if (znach < arr[zn]) {
-        end = zn;
-      } else {
-        start = zn;
-      }
-      zn = Math.floor((start + end) / 2);
-    }
-    if (arr[zn] === znach) {
-      rtn = arr[zn] - arr[0];
+  let end = arr.length - 1;
+  let middle = Math.floor((arr.length - 1) / 2);
+  let index;
+  if (arr[start] === znach) return start;
+  if (arr[end] === znach) return end;
+  while (!index) {
+    if (arr[middle] === znach) {
+      index = middle;
+    } else if (arr[middle] < znach) {
+      start = middle + 1;
+      middle = Math.floor((end + start) / 2);
+    } else {
+      end = middle - 1;
+      middle = Math.floor((end + start) / 2);
     }
   }
-  return znach - arr[0];
+  return index;
 }
 
 module.exports = findIndex;

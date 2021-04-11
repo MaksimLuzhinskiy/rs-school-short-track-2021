@@ -1,4 +1,5 @@
-// const ListNode = require('../extensions/list-node');
+// eslint-disable-next-line no-unused-vars
+const ListNode = require('../extensions/list-node');
 /**
  * Implement the Queue with a given interface via linked list (use ListNode extension above).
  *
@@ -12,16 +13,37 @@
  */
 
 class Queue {
-  get size() {
-    throw new Error('Not implemented');
+  constructor() {
+    this.first = null;
+    this.sizee = 0;
+    this.top = null;
   }
 
-  enqueue(/* element */) {
-    throw new Error('Not implemented');
+  get size() {
+    return this.sizee;
+  }
+
+  enqueue(element) {
+    const node = new ListNode(element);
+    if (!this.first) {
+      this.first = node;
+      this.top = node;
+    } else {
+      this.top.next = node;
+      this.top = node;
+    }
+    this.sizee += 1;
   }
 
   dequeue() {
-    throw new Error('Not implemented');
+    if (!this.first) return null;
+    const deleted = this.first;
+    if (this.top === this.first) {
+      this.top = null;
+    }
+    this.first = this.first.next;
+    this.sizee -= 1;
+    return deleted.value;
   }
 }
 
